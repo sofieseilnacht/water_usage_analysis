@@ -2,7 +2,7 @@
 
 This project analyzes water flow data across District Metered Areas (DMAs) to identify anomalies and understand water usage patterns. The study focuses on detecting irregularities in water flow that may indicate leaks, inefficiencies, or sensor errors. By utilizing data-driven visualizations and machine learning models, we provide actionable insights for water management.
 
-## Overview
+# Overview
 
 The purpose of this script is to:
 
@@ -11,25 +11,27 @@ The purpose of this script is to:
 - Experiment with Hugging Face models, including DistilBERT, to optimize text processing and classification.
 - Evaluate model performance using key metrics: precision, recall, F1-score, and accuracy.
 
-## Table of Contents
+# Table of Contents
 
 1. [Overview](#overview)
 2. [Getting Started](#getting-started)
-3. [Dependencies](#dependencies)
-4. [Dataset](#dataset) 
-5. [Class Imbalance](#class-imbalance)
-6. [How It Works](#how-it-works)
-7. [Data Preprocessing](#data-preprocessing)
-8. [Model Training & Optimization](#model-training-&-optimization)
-9. [Evaluation](#evaluation)
-10. [Challenges in Hate Speech Classification](#challenges-in-hate-speech-classification)
-11. [Future Improvements](#future-improvements)
+3. [Dataset](#dataset)
+4. [Data Exploration and Preprocessing](#data-exploration-and-preprocessing) 
+5. [Visualizations](#visualizations)
+6. [Model Selection](#model-selection)
+7. [Metrics](#metrics)
+8. [Anomaly Detection Model Results](#anomaly-detection-model-results)
+9. [Consumer Water Usage Model Results](#consumer-water-usage-model-results)
+10. [Limitations](#limitations)
+11. [Conclusion and Recommendations](#conclusion-and-recommendations)
 
 # Getting Started
 
-To run this code, you just need to run each cell within the Jupyter Notebook, ensuring that you have the proper csv file name/path to upload the data.
+To run this code, simply execute each cell sequentially in the Jupyter Notebook, ensuring that the correct CSV file name and path are specified for data loading.
 
-## Dataset
+Since the code includes Markdown cells and inline comments, all necessary explanations are provided within the notebook itself. For brevity and to avoid repetition, please refer to these annotations as they detail the methodology, implementation, and reasoning behind each step.
+
+# Dataset
 
 The dataset is a CSV file containing 974,934 rows of water flow data. The data includes some missing values and features the following column headers:
 
@@ -45,114 +47,63 @@ The dataset is a CSV file containing 974,934 rows of water flow data. The data i
 | UNITS | The unit of measurement for flow. | String | 
 
 
-## Class Imbalance
-
-
-# How It Works
-
-## Data Preprocessing
-
-
-
-## Model Training & Optimization:
-
-
-## Evaluation:
-
-
-# Challenges in Hate Speech Classification
-
-
-#### Context Dependence:
-
-
-#### Detection of Sarcasm & Irony:
-
-
-#### Class Imbalance & Label Ambiguity:
-
-
-
-#### Challenges with Coded & Subtle Hate Speech:
-
-
-# Future Improvements
- 
-
-
-# Data-Driven Insights: Anomaly Detection and Water Usage Patterns
-
-
-Data Exploration and Preprocessing
+# Data Exploration and Preprocessing
 
 Initial data exploration focused on basic statistics and anomaly identification, including handling missing values and negative flow values that could signal sensor malfunctions or system inefficiencies. These steps were crucial for ensuring data integrity before applying machine learning models.
 
-Visualizations
+# Visualizations
 
-To better understand the data and highlight key patterns, several visualizations were generated:
+To better understand the data and highlight key patterns, several visualizations were generated, all of which can be found within the final Jupyter Notebook:
 
-Actual vs. Expected Minimum Night Flow Scatterplot – Highlights deviations from expected values, which may indicate leaks or inefficiencies.
-
-Index vs. Actual Minimum Night Flow Plot – Identifies and visualizes negative flow values, showing their frequency and distribution.
-
-Geographic Distribution of DMAs with Negative and Missing Flow – Maps out areas experiencing persistent negative or missing flow values.
-
-High and Medium Priority Regions Map – Displays regions where negative flow values occur frequently, helping prioritize investigation.
-
-Map of Missing Data Locations – Pinpoints geographic areas with missing data, which may be due to faulty sensors or data collection issues.
+- Actual vs. Expected Minimum Night Flow Scatterplot – Highlights deviations from expected values, which may indicate leaks or inefficiencies.
+- Index vs. Actual Minimum Night Flow Plot – Identifies and visualizes negative flow values, showing their frequency and distribution.
+- Geographic Distribution of DMAs with Negative and Missing Flow – Maps out areas experiencing persistent negative or missing flow values.
+- High and Medium Priority Regions Map – Displays regions where negative flow values occur frequently, helping prioritize investigation.
+- Map of Missing Data Locations – Pinpoints geographic areas with missing data, which may be due to faulty sensors or data collection issues.
 
 These visuals provide clear spatial and temporal insights into water anomalies, enabling targeted analysis of key problem areas.
 
-Model Selection
+# Model Selection
 
 For anomaly detection and water usage analysis, Random Forest Classification (RFC) was chosen due to its ability to:
 
-Handle complex, non-linear relationships in the data.
-
-Provide feature importance insights, helping prioritize key variables.
-
-Resist overfitting, which is particularly important given the imbalance in the dataset.
-
-Be easy to implement and flexible, making it a practical choice within project constraints.
+- Handle complex, non-linear relationships in the data.
+- Provide feature importance insights, helping prioritize key variables.
+- Resist overfitting, which is particularly important given the imbalance in the dataset.
+- Be easy to implement and flexible, making it a practical choice within project constraints.
 
 To address class imbalance, oversampling techniques were used to ensure fair representation of anomalies in the dataset.
 
-Anomaly Detection Model Results
+# Metrics
 
-The anomaly detection model achieved 100% accuracy.
+To assess model performance, we used the following evaluation metrics:
 
-Despite the high accuracy, the dataset was highly imbalanced, with significantly more normal flow instances than anomalies.
+- Accuracy: The proportion of correctly classified instances out of all instances in the dataset, providing an overall measure of model correctness.
+- Precision: The percentage of predicted positive instances that were actually positive, indicating the model’s reliability in making positive classifications.
+- Recall: The proportion of actual positive instances that were correctly identified, measuring the model’s effectiveness in capturing true positives.
+- F1 Score: A balanced metric that combines precision and recall, particularly useful for imbalanced datasets where accuracy alone may be misleading.
+- Support: The number of true instances for each class in the dataset, providing context for evaluating the other metrics.
 
-The model handled this imbalance well, but further validation on diverse datasets is needed to confirm robustness and prevent overfitting.
+# Anomaly Detection Model Results
 
-Feature importance analysis showed that actual flow was the most significant factor, contributing 67.3% to the model’s decisions.
+The anomaly detection model achieved 100% accuracy. Despite the high accuracy, the dataset was highly imbalanced, with significantly more normal flow instances than anomalies. The model handled this imbalance well, but further validation on diverse datasets is needed to confirm robustness and prevent overfitting. Feature importance analysis showed that actual flow was the most significant factor, contributing 67.3% to the model’s decisions.
 
-Consumer Water Usage Model Results
+# Consumer Water Usage Model Results
 
-The water usage classification model achieved 97.67% accuracy, consistently predicting high or low usage patterns.
+The water usage classification model achieved 97.67% accuracy, consistently predicting high or low usage patterns. A small number of misclassifications occurred, but the model remained robust. Averaged flow was identified as the most influential feature, contributing 92.3% to predictions. Future improvements could involve incorporating temporal factors to capture broader seasonal or hourly usage trends.
 
-A small number of misclassifications occurred, but the model remained robust.
-
-Averaged flow was identified as the most influential feature, contributing 92.3% to predictions.
-
-Future improvements could involve incorporating temporal factors to capture broader seasonal or hourly usage trends.
-
-Limitations
+# Limitations
 
 While the models performed well, there are some key limitations:
 
-The models rely heavily on flow data, which may not fully capture external factors like weather conditions, infrastructure changes, or seasonal variations.
+- The models rely heavily on flow data, which may not fully capture external factors like weather conditions, infrastructure changes, or seasonal variations.
+- The anomaly detection model may be prone to overfitting due to the class imbalance and needs further validation with additional datasets.
+- The water usage model could be enhanced by considering time-series data and exploring alternative algorithms for improved performance.
 
-The anomaly detection model may be prone to overfitting due to the class imbalance and needs further validation with additional datasets.
-
-The water usage model could be enhanced by considering time-series data and exploring alternative algorithms for improved performance.
-
-Conclusion and Recommendations
+# Conclusion and Recommendations
 
 Both models provided valuable insights into water anomalies and usage patterns, highlighting potential inefficiencies in the system. Future work should include:
 
-Implementing time-series analysis to capture long-term usage patterns.
-
-Experimenting with alternative machine learning models, such as gradient boosting, to enhance predictive accuracy.
-
-Validating results with external datasets to ensure model generalizability and robustness.
+- Implementing time-series analysis to capture long-term usage patterns.
+- Experimenting with alternative machine learning models, such as gradient boosting, to enhance predictive accuracy.
+- Validating results with external datasets to ensure model generalizability and robustness.
